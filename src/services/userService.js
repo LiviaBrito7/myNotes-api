@@ -8,4 +8,17 @@ async function getAllUsers() {
   return prisma.user.findMany({ include: { notes: true } });
 }
 
-module.exports = { createUser, getAllUsers };
+async function updateUser(id, data) {
+    return prisma.user.update({
+      where: { id: Number(id) },
+      data,
+    });
+  }
+  
+  async function deleteUser(id) {
+    return prisma.user.delete({
+      where: { id: Number(id) },
+    });
+  }
+  
+  module.exports = { createUser, getAllUsers, updateUser, deleteUser };

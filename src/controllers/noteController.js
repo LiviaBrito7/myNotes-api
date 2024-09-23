@@ -19,4 +19,24 @@ async function getAllNotesController(req, res) {
   }
 }
 
-module.exports = { createNoteController, getAllNotesController };
+async function updateNoteController(req, res) {
+    try {
+      const { id } = req.params;
+      const updatedNote = await updateNote(id, req.body);
+      res.json(updatedNote);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
+  async function deleteNoteController(req, res) {
+    try {
+      const { id } = req.params;
+      await deleteNote(id);
+      res.status(204).send(); // No Content
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
+  module.exports = { createNoteController, getAllNotesController, updateNoteController, deleteNoteController };

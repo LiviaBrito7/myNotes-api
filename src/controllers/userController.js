@@ -19,4 +19,24 @@ async function getAllUsersController(req, res) {
   }
 }
 
-module.exports = { createUserController, getAllUsersController };
+async function updateUserController(req, res) {
+    try {
+      const { id } = req.params;
+      const updatedUser = await updateUser(id, req.body);
+      res.json(updatedUser);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
+  async function deleteUserController(req, res) {
+    try {
+      const { id } = req.params;
+      await deleteUser(id);
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
+  module.exports = { createUserController, getAllUsersController, updateUserController, deleteUserController };

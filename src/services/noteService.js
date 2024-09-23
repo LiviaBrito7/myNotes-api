@@ -8,4 +8,17 @@ async function getAllNotes() {
   return prisma.note.findMany({ include: { user: true } });
 }
 
-module.exports = { createNote, getAllNotes };
+async function updateNote(id, data) {
+    return prisma.note.update({
+      where: { id: Number(id) },
+      data,
+    });
+  }
+  
+  async function deleteNote(id) {
+    return prisma.note.delete({
+      where: { id: Number(id) },
+    });
+  }
+  
+  module.exports = { createNote, getAllNotes, updateNote, deleteNote };
