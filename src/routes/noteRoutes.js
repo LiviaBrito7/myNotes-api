@@ -1,10 +1,11 @@
 const express = require('express');
-const { createNoteController, getAllNotesController, updateNoteController, deleteNoteController } = require('../controllers/noteController');
+const { createNoteController, getAllNotesController, updateNoteController, deleteNoteController, getNoteController } = require('../controllers/noteController');
 const router = express.Router();
 
 router.post('/notes', createNoteController);
 router.get('/notes', getAllNotesController);
-router.put('/notes/id', updateNoteController);  // Rota para atualizar a nota
-router.delete('/notes/id', deleteNoteController); // Rota para deletar a nota
+router.get('/notes/:id', getNoteController);
+router.put('/notes/:id', updateNoteController);  
+router.delete('/notes/:id', deleteNoteController); 
 
 module.exports = router;

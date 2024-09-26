@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "node --watch index.js"
   },
   "keywords": [],
   "author": "",
@@ -11,7 +13,9 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^5.19.1",
+    "bcrypt": "^5.1.1",
     "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
     "prisma": "^5.19.1"
   }
 }
