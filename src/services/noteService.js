@@ -1,5 +1,5 @@
 const prisma = require('../prisma');
-const { validateNoteData } = require('../middleware/noteValidation');
+const { validateNoteData } = require('../utils/noteValidation');
 
 async function createNote(data) {
   validateNoteData(data);

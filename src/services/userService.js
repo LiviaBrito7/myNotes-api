@@ -1,6 +1,26 @@
 const prisma = require('../prisma');
 const bcrypt = require('bcrypt');
-const { validateUserData } = require('../middleware/userValidation');
+const { validateUserData } = require('../utils/userValidation');
+const { createToken } = require('../auth/createJWT');
+
+async function loginUser(email, password) {
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!user) {
+    throw new Error('Usuário não encontrado.');
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  if (!isPasswordValid) {
+    throw new Error('Email ou senha incorretos.');
+  }
+
+  const { token } = createToken(user)
+
+  return { user: { id: user.id, name: user.name, email: user.email }, token };
+}
 
 async function createUser(data) {
   validateUserData(data);
@@ -63,4 +83,4 @@ async function deleteUser(id) {
   });
 }
 
-module.exports = { createUser, getAllUsers, updateUser, deleteUser, getUser };
+module.exports = { createUser, getAllUsers, updateUser, deleteUser, getUser, loginUser };
