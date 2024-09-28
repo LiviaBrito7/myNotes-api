@@ -1,5 +1,5 @@
 const express = require('express');
-const { createNoteController, getAllNotesController, updateNoteController, deleteNoteController, getNoteController } = require('../controllers/noteController');
+const { createNoteController, getAllNotesController, deleteNoteController, getNoteController } = require('../controllers/noteController');
 const router = express.Router();
 
 router.post('/notes', createNoteController);
