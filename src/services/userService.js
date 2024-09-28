@@ -1,6 +1,6 @@
 const prisma = require('../prisma');
 const bcrypt = require('bcrypt');
-const { validateUserData } = require('../middleware/userValidation');
+const { validateUserData } = require('../utils/userValidation');
 const { createToken } = require('../auth/createJWT');
 
 async function loginUser(email, password) {
