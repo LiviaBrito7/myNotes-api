@@ -1,4 +1,4 @@
-const { createNote, getAllNotes, getNote, updateNote, deleteNote } = require('../services/noteService');
+const { createNote, getAllNotes, getNote,  deleteNote } = require('../services/noteService');
 
 async function createNoteController(req, res) {
   try {
@@ -29,16 +29,6 @@ async function getNoteController(req, res) {
   }
 }
 
-async function updateNoteController(req, res) {
-  try {
-    const { id } = req.params;
-    const updatedNote = await updateNote(id, req.body);
-    res.json(updatedNote);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-}
-
 async function deleteNoteController(req, res) {
   try {
     const { id } = req.params;
@@ -49,10 +39,4 @@ async function deleteNoteController(req, res) {
   }
 }
 
-module.exports = { createNoteController, getAllNotesController, getNoteController,
-  
-  
-  
-  
-  
-  updateNoteController, deleteNoteController };
+module.exports = { createNoteController, getAllNotesController, getNoteController, deleteNoteController };

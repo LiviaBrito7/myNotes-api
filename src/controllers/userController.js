@@ -1,24 +1,14 @@
-const { createUser, getAllUsers, updateUser, deleteUser, getUser, loginUser } = require('../services/userService');
+const { createUser, getAllUsers, updateUser, deleteUser, getUser } = require('../services/userService');
 const bcrypt = require('bcrypt');
 
 async function createUserController(req, res) {
   const { name, email, password } = req.body;
   try {
-    const user = await createUser({ name, email, password });
-    res.status(201).json(user); 
+    const user = await createUser({ name, email, password});
+    const { password: _, ...userWithoutPassword } = user;
+    res.status(201).json(userWithoutPassword);
   } catch (error) {
     res.status(400).json({ message: error.message }); 
-  }
-}
-
-async function loginUserController(req, res) {
-  const { email, password } = req.body; 
-
-  try {
-    const { user, token } = await loginUser(email, password);
-    res.status(200).json({ user, token }); 
-  } catch (error) {
-    res.status(400).json({ message: error.message });
   }
 }
 
@@ -61,4 +51,4 @@ async function deleteUserController(req, res) {
   }
 }
 
-module.exports = { createUserController, getAllUsersController, updateUserController, deleteUserController, getUserController, loginUserController};
+module.exports = { createUserController, getAllUsersController, updateUserController, deleteUserController, getUserController};
