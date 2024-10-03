@@ -17,7 +17,7 @@ async function loginUser(email, password) {
     throw new Error('Email ou senha incorretos.');
   }
 
-  const { token } = createToken(user)
+  const { token } = await createToken(user)
 
   return { user: { id: user.id, name: user.name, email: user.email }, token };
 }
