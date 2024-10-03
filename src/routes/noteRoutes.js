@@ -1,10 +1,11 @@
 const express = require('express');
 const { createNoteController, getAllNotesController, deleteNoteController, getNoteController } = require('../controllers/noteController');
+const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 
-router.post('/notes', createNoteController);
-router.get('/notes', getAllNotesController);
-router.get('/notes/:id', getNoteController);
-router.delete('/notes/:id', deleteNoteController); 
+router.post('/notes', authMiddleware, createNoteController);
+router.get('/notes', authMiddleware, getAllNotesController);
+router.get('/notes/:id', authMiddleware, getNoteController);
+router.delete('/notes/:id', authMiddleware, deleteNoteController); 
 
 module.exports = router;
