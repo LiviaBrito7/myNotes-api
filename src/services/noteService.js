@@ -35,10 +35,17 @@ async function getNote(id) {
   });
 }
 
+async function updateNote(id, data) {
+  return prisma.note.update({
+    where: { id: Number(id) },
+    data,
+  });
+}
+
 async function deleteNote(id) {
   return prisma.note.delete({
     where: { id: Number(id) },
   });
 }
 
-module.exports = { createNote, getAllNotes, getNote, deleteNote };
+module.exports = { createNote, getAllNotes, getNote, updateNote, deleteNote };
