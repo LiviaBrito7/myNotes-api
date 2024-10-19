@@ -1,6 +1,6 @@
 const prisma = require('../prisma');
 const bcrypt = require('bcrypt');
-const { validateUserData } = require('../utils/userValidation');
+const { isValidEmail, isValidPassword, validateUserData } = require('../utils/userValidation');
 const { createToken } = require('../auth/createJWT');
 
 async function loginUser(email, password) {
@@ -17,7 +17,7 @@ async function loginUser(email, password) {
     throw new Error('Email ou senha incorretos.');
   }
 
-  const { token } = await createToken(user)
+  const { token } = await createToken({ id: user.id, name: user.name, email: user.email })
 
   return { user: { id: user.id, name: user.name, email: user.email }, token };
 }
