@@ -12,10 +12,13 @@ async function createNoteController(req, res) {
 
 async function getAllNotesController(req, res) {
   try {
-    const notes = await getAllNotes();
+    const notes = await getAllNotes(req.user.id);
+    console.log(notes);
     res.json(notes);
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({ error: error.message });
+  
   }
 }
 
